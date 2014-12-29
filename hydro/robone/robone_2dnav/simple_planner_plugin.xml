@@ -1,0 +1,5 @@
+<library path="lib/libsimple_planner_plugin_lib">
+  <class name="global_planner/SimplePlanner" type="simple_planner_plugin::SimplePlannerPlugin" base_class_type="nav_core::BaseGlobalPlanner">
+    <description>This is a global planner plugin.</description>
+  </class>
+ </library>
