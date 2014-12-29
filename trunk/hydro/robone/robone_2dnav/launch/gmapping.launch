@@ -1,0 +1,9 @@
+<launch>
+  <master auto="start"/>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <remap from="scan" to="/robone/laser/scan" />
+        <rosparam file="$(find robone_2dnav)/config/slam_gmapping_params.yaml" command="load" />
+  </node>
+
+</launch>

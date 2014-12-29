@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Wheel helper properties -->
+  <xacro:property name="wheel_holder_width" value="0.01"/>
+
+  <xacro:macro name="wheel" params="suffix width radius x_shift y_shift z_shift">
+
+    <link name="${suffix}_wheel_holder">
+      <visual>
+        <xacro:box_geometry width="${wheel_holder_width}" height="${wheel_holder_width}" depth="${radius + wheel_holder_width*2}"/>
+        <xacro:green_material/>
+      </visual>
+      <xacro:box_collision width="${wheel_holder_width}" height="${wheel_holder_width}" depth="${radius + wheel_holder_width*2}"/>
+      <xacro:box_inertia mass="0.03" width="${wheel_holder_width}" height="${wheel_holder_width}" 
+                         depth="${radius + wheel_holder_width*2}"/>
+    </link>
+
+    <joint name="base_to_${suffix}_wheel_holder" type="fixed">
+      <parent link="base_link"/>
+      <child link="${suffix}_wheel_holder"/>
+      <origin xyz="${x_shift} ${y_shift} ${z_shift - radius/2 - wheel_holder_width}" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="${suffix}_wheel">
+      <visual>
+        <xacro:cylinder_geometry radius="${radius}" height="${width}"/>
+        <xacro:black_material/>
+      </visual>
+      <xacro:cylinder_collision radius="${radius}" height="${width}"/>
+      <xacro:cylinder_inertia mass="0.03" radius="${radius}" height="${width}"/>
+      <dynamics damping="0.01" friction="100.0" />
+    </link>
+
+    <joint name="wheel_holder_to_${suffix}_wheel" type="continuous">
+      <parent link="${suffix}_wheel_holder"/>
+      <child link="${suffix}_wheel"/>
+      <origin xyz="${wheel_holder_width/2 + width/2} 0 ${-radius/2 - wheel_holder_width/2}" rpy="0 ${-pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="100" velocity="100" />
+      <dynamics damping="0.01" friction="100.0" />
+    </joint>
+
+  </xacro:macro>
+
+  <xacro:macro name="motor_wheel" params="suffix width radius x_shift y_shift z_shift">
+
+    <xacro:wheel  suffix="${suffix}" width="${width}" radius="${radius}" 
+       x_shift="${x_shift}" y_shift="${y_shift}"  z_shift="${z_shift}"/>
+
+    <transmission name="${suffix}_transmission">
+       <type>transmission_interface/SimpleTransmission</type>
+       <joint name="wheel_holder_to_${suffix}_wheel">
+         <hardwareInterface>EffortJointInterface</hardwareInterface>
+       </joint>
+       <actuator name="${suffix}_motor">
+         <hardwareInterface>EffortJointInterface</hardwareInterface>
+         <mechanicalReduction>1</mechanicalReduction>
+       </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+
+  <xacro:macro name="simple_wheel" params="suffix width radius y_shift z_shift">
+
+    <xacro:wheel  suffix="${suffix}" width="${width}" radius="${radius}" 
+       x_shift="0" y_shift="${y_shift}"  z_shift="${z_shift}"/>
+
+  </xacro:macro>
+
+
+</robot>

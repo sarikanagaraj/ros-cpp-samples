@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robone">
+
+  <!-- Global constants -->
+  <xacro:property name="pi" value="3.1415926535897931"/>
+
+  <!-- Included files -->
+  <xacro:include filename="$(find robone_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find robone_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find robone_description)/urdf/wheel.xacro"/>
+
+  <!-- Robot properties -->
+  <xacro:property name="base_radius" value="0.2"/>
+  <xacro:property name="base_height" value="0.1"/>
+
+  <xacro:property name="sensor_length" value="0.01"/>
+
+  <xacro:property name="wheel_width" value="0.02"/>
+  <xacro:property name="wheel_radius" value="0.05"/>
+
+  <link name="base_link">
+    <visual>
+      <xacro:cylinder_geometry radius="${base_radius}" height="${base_height}"/>
+      <xacro:white_material/>
+    </visual>
+    <xacro:cylinder_collision radius="${base_radius+0.02}" height="${base_height*2}"/>
+    <xacro:cylinder_inertia mass="5" radius="${base_radius}" height="${base_height}"/>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <origin xyz="0 0 ${sensor_length/2}" rpy="0 0 0"/>
+    <visual>
+      <xacro:box_geometry width="${sensor_length}" height="${sensor_length}" depth="${sensor_length}"/>
+      <xacro:red_material/>
+    </visual>
+    <xacro:box_collision width="${sensor_length}" height="${sensor_length}" depth="${sensor_length}"/>
+    <xacro:box_inertia mass="1e-5" width="${sensor_length}" height="${sensor_length}" depth="${sensor_length}"/>
+  </link>
+
+  <xacro:motor_wheel suffix="right" width="${wheel_width}" radius="${wheel_radius}" 
+       x_shift="${base_radius/2}" y_shift="${-base_radius/2}" z_shift="${-base_height/2}"/>
+
+  <xacro:motor_wheel suffix="left" width="${wheel_width}" radius="${wheel_radius}" 
+       x_shift="${-base_radius/2}" y_shift="${-base_radius/2}" z_shift="${-base_height/2}"/>
+
+  <xacro:simple_wheel suffix="forward" width="${wheel_width}" radius="${wheel_radius}" 
+       y_shift="${base_radius/2}" z_shift="${-base_height/2}"/>
+
+</robot>
