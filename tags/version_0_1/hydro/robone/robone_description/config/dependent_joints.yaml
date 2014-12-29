@@ -1,0 +1,2 @@
+dependent_joints:
+  wheel_holder_to_forward_wheel: {parent: wheel_holder_to_left_wheel, factor: 1 }
