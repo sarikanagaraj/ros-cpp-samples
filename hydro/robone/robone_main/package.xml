@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>The Robone main package</description>
   <maintainer email="john@todo.todo">john</maintainer>
-  <license>BSD</license>
+  <license>MIT</license>
 
   <!-- The *_depend tags are used to specify dependencies -->
   <!-- Dependencies can be catkin packages or system dependencies -->
