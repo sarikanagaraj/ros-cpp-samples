@@ -75,12 +75,12 @@ find_package(catkin REQUIRED)
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+#catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robone_2dnav
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
-)
+#)
 
 ###########
 ## Build ##
@@ -88,14 +88,10 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
-  include/simple_planner_plugin
-  /usr/include/pcl-1.7
-  /usr/include/eigen3
-)
+#include_directories()
 
 ## Declare a cpp library
-add_library(simple_planner_plugin_lib  src/simple_planner_plugin.cpp)
+#add_library()
 
 ## Declare a cpp executable
 # add_executable(robone_2dnav_node src/robone_2dnav_node.cpp)
