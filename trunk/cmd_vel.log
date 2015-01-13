@@ -1,3 +1,24 @@
+David,
+
+Actually I have interesting data in cmd_vel
+At the beginning of the movement I have cmd_vel with angular.z > 0 the rest of the linear and angular components are zero.
+This is only for few commands.
+After this linear.x became 0.5 and angular.z start decreasing towards zero. Other linear and angular components are zero.
+
+So it seems that robot is turning at the beginning of movement however Navigation Goal is in from of it.
+I have looked in RViz and it seems that my base_link is oriented in the following way
+  green axis is pointing from center of robot to it's front
+  red axis from center to right side.
+  blue axis from center to the top.
+
+Is navigation stack assuming that red axis should point from robots center to front?
+This is how I can explain this turn at the beginning of the movement to the Navigation Goal.
+
+Thanks in advance.
+
+P.S. David could you please share with us some tips and tricks how do you debug move_base navigation code?
+
+
 linear: 
   x: 0.0
   y: 0.0
