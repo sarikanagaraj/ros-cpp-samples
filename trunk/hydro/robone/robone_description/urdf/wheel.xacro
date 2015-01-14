@@ -36,7 +36,7 @@
     <joint name="wheel_holder_to_${suffix}_wheel" type="continuous">
       <parent link="${suffix}_wheel_holder"/>
       <child link="${suffix}_wheel"/>
-      <origin xyz="${wheel_holder_width/2 + width/2} 0 ${-radius/2 - wheel_holder_width/2}" rpy="0 ${-pi/2} 0" />
+      <origin xyz="0 ${wheel_holder_width/2 + width/2} ${-radius/2 - wheel_holder_width/2}" rpy="0 ${-pi/2} ${-pi/2}" />
       <axis xyz="0 0 1" />
       <limit effort="100" velocity="100" />
       <dynamics damping="0.01" friction="100.0" />
@@ -63,10 +63,10 @@
   </xacro:macro>
 
 
-  <xacro:macro name="simple_wheel" params="suffix width radius y_shift z_shift">
+  <xacro:macro name="simple_wheel" params="suffix width radius x_shift z_shift">
 
     <xacro:wheel  suffix="${suffix}" width="${width}" radius="${radius}" 
-       x_shift="0" y_shift="${y_shift}"  z_shift="${z_shift}"/>
+       x_shift="${x_shift}" y_shift="0"  z_shift="${z_shift}"/>
 
   </xacro:macro>
 

@@ -46,12 +46,12 @@
   </link>
 
   <xacro:motor_wheel suffix="right" width="${wheel_width}" radius="${wheel_radius}" 
-       x_shift="${base_radius/2}" y_shift="${-base_radius/2}" z_shift="${-base_height/2}"/>
-
-  <xacro:motor_wheel suffix="left" width="${wheel_width}" radius="${wheel_radius}" 
        x_shift="${-base_radius/2}" y_shift="${-base_radius/2}" z_shift="${-base_height/2}"/>
 
+  <xacro:motor_wheel suffix="left" width="${wheel_width}" radius="${wheel_radius}" 
+       x_shift="${-base_radius/2}" y_shift="${base_radius/2}" z_shift="${-base_height/2}"/>
+
   <xacro:simple_wheel suffix="forward" width="${wheel_width}" radius="${wheel_radius}" 
-       y_shift="${base_radius/2}" z_shift="${-base_height/2}"/>
+       x_shift="${base_radius/2}" z_shift="${-base_height/2}"/>
 
 </robot>
