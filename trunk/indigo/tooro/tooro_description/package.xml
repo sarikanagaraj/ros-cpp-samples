@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package>
+  <name>tooro_description</name>
+  <version>0.0.1</version>
+  <description>The Tooro description package</description>
+  <maintainer email="john@todo.todo">Andriy</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+  </export>
+</package>
