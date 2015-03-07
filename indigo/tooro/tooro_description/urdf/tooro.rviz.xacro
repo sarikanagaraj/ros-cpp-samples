@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="tooro">
+
+<xacro:include filename="$(find tooro_description)/urdf/tooro.main.xacro"/>
+
+</robot>
