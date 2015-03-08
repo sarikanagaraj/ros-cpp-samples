@@ -67,26 +67,8 @@
     <xacro:box_inertia z_origin="${link_height/2- axel_offset}" mass="0.1" width="${link_width}" depth="${link_width}" height="${link_height}" />
   </link>
 
-  <joint name="camera_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="${camera_link} 0 ${link_height - axel_offset*2}" rpy="0 0 0"/>
-    <parent link="link3"/>
-    <child link="camera_link"/>
-  </joint>
-
-  <link name="camera_link">
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <xacro:box_geometry width="${camera_link}" depth="${camera_link}" height="${camera_link}" />
-      <xacro:red_material />
-    </visual>
-
-    <xacro:box_collision z_origin="0" width="${camera_link}" depth="${camera_link}" height="${camera_link}" />
-    <xacro:box_inertia z_origin="0" mass="0.01" width="${camera_link}" depth="${camera_link}" height="${camera_link}"/>
-  </link>
-
   <joint name="arm_joint" type="fixed">
-    <axis xyz="0 1 0" />
+    <axis xyz="1 0 0" />
     <origin xyz="${-link_width} 0 ${link_height - axel_offset*2}" rpy="0 0 0"/>
     <parent link="link3"/>
     <child link="arm_link"/>
