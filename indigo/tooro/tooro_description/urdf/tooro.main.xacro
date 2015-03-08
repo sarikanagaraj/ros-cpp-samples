@@ -3,6 +3,8 @@
 
   <xacro:property name="link_width" value="0.01" />
   <xacro:property name="link_height" value="0.3" />
+  <xacro:property name="arm_width" value="0.07" />
+  <xacro:property name="finger_length" value="0.07" />
   <xacro:property name="camera_link" value="0.005" />
   <xacro:property name="axel_offset" value="0.005" />
 
@@ -81,6 +83,62 @@
 
     <xacro:box_collision z_origin="0" width="${camera_link}" depth="${camera_link}" height="${camera_link}" />
     <xacro:box_inertia z_origin="0" mass="0.01" width="${camera_link}" depth="${camera_link}" height="${camera_link}"/>
+  </link>
+
+  <joint name="arm_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${-link_width} 0 ${link_height - axel_offset*2}" rpy="0 0 0"/>
+    <parent link="link3"/>
+    <child link="arm_link"/>
+  </joint>
+
+  <link name="arm_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:box_geometry width="${link_width}" depth="${arm_width}" height="${link_width}" />
+      <xacro:green_material />
+    </visual>
+
+    <xacro:box_collision z_origin="0" width="${arm_width}" depth="${link_width}" height="${link_width}" />
+    <xacro:box_inertia z_origin="0" mass="0.01" width="${arm_width}" depth="${link_width}" height="${link_width}" />
+  </link>
+
+  <joint name="left_finger_joint" type="continuous">
+    <parent link="arm_link"/>
+    <child link="left_finger_link"/>
+    <origin xyz="${-link_width} ${arm_width/2 - link_width/2} ${-link_width/2}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <link name="left_finger_link">
+    <visual>
+      <origin xyz="0 0 ${finger_length/2}" rpy="0 0 0"/>
+      <xacro:box_geometry width="${link_width}" depth="${link_width}" height="${finger_length}" />
+      <xacro:grey_material />
+    </visual>
+
+    <xacro:box_collision z_origin="${finger_length/2}" width="${link_width}" depth="${link_width}" height="${finger_length}" />
+    <xacro:box_inertia z_origin="${finger_length/2}" mass="0.01" width="${link_width}" depth="${link_width}" height="${finger_length}" />
+  </link>
+
+  <joint name="right_finger_joint" type="continuous">
+    <parent link="arm_link"/>
+    <child link="right_finger_link"/>
+    <origin xyz="${-link_width} ${-arm_width/2 + link_width/2} ${-link_width/2}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <link name="right_finger_link">
+    <visual>
+      <origin xyz="0 0 ${finger_length/2}" rpy="0 0 0"/>
+      <xacro:box_geometry width="${link_width}" depth="${link_width}" height="${finger_length}" />
+      <xacro:grey_material />
+    </visual>
+
+    <xacro:box_collision z_origin="${finger_length/2}" width="${link_width}" depth="${link_width}" height="${finger_length}" />
+    <xacro:box_inertia z_origin="${finger_length/2}" mass="0.01" width="${link_width}" depth="${link_width}" height="${finger_length}" />
   </link>
 
 </robot>
